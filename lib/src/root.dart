@@ -1,5 +1,7 @@
 
 
+import 'package:bruce_flutter_demo/src/blocs/bloc_provider.dart';
+import 'package:bruce_flutter_demo/src/screens/home/home_bloc.dart';
 import 'package:bruce_flutter_demo/src/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +14,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: BlocProvider<IncrementBloc>(
+        bloc: IncrementBloc(),
+        child: MyHomePage(title: "Flutter Demo Home Page")
+      )
     );
   }
 }
