@@ -1,57 +1,51 @@
 import 'package:bruce_flutter_demo/src/blocs/bloc_provider.dart';
+import 'package:bruce_flutter_demo/src/screens/calculator/calculator_bloc.dart';
+import 'package:bruce_flutter_demo/src/screens/calculator/calculator_screen.dart';
+import 'package:bruce_flutter_demo/src/screens/counter/counter_bloc.dart';
+import 'package:bruce_flutter_demo/src/screens/counter/counter_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'home_bloc.dart';
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final IncrementBloc bloc = BlocProvider.of<IncrementBloc>(context);
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('First Route'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            StreamBuilder<int>(
-                initialData: 0,
-                stream: bloc.outCounter,
-                builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                  return Text('${snapshot.data}');
-                }),
-            
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          bloc.incrementCounter.add(null);
-        },
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          RaisedButton(
+              child: Text('Open CounterScreen'),
+              onPressed: () {
+                _openCounterPage(context);
+              }),
+          RaisedButton(
+              child: Text('Open CalculatorScreen'),
+              onPressed: () {
+                _openCalculatorPage(context);
+              })
+        ],
+      )),
     );
   }
+}
+
+void _openCounterPage(BuildContext context) {
+  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    return BlocProvider<CounterBloc>(
+      bloc: CounterBloc(),
+      child: CounterScreen(),
+    );
+  }));
+}
+
+void _openCalculatorPage(BuildContext context) {
+  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    return BlocProvider<CalculatorBloc>(
+      bloc: CalculatorBloc(),
+      child: CalculatorScreen(),
+    );
+  }));
 }

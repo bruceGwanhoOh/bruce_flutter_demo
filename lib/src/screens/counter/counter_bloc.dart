@@ -1,7 +1,7 @@
+
 import 'dart:async';
 
 import 'package:bruce_flutter_demo/src/blocs/bloc_provider.dart';
-
 
 class CounterBloc implements BlocBase{
   int _counter;
@@ -15,14 +15,14 @@ class CounterBloc implements BlocBase{
 
   CounterBloc(){
     _counter = 0;
-    _actionController.stream
-                     .listen(_handleLogic);
+    _actionController.stream.listen(_handleLogic);
   }
 
   void _handleLogic(data){
     _counter = _counter + 1;
     _inAdd.add(_counter);
   }
+
 
   @override
   void dispose() {
