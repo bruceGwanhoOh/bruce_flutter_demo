@@ -45,15 +45,16 @@ class _CounterScreenState extends State<CounterScreen> {
         children: <Widget>[
           FloatingActionButton(
             onPressed: () {
-              bloc.incrementCounter.add(null);
+              bloc.incrementCounter.add(1);
             },
             child: Icon(Icons.add),
           ),
+          SizedBox(height: 10,),
           FloatingActionButton(
             onPressed: () {
-              bloc.incrementCounter.add(null);
+              bloc.incrementCounter.add(-1);
             },
-            child: Icon(Icons.add),
+            child: Icon(Icons.remove),
           )
         ],
       ),

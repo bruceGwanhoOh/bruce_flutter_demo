@@ -12,14 +12,16 @@ class CounterBloc implements BlocBase{
 
   StreamController _actionController = StreamController();
   StreamSink get incrementCounter => _actionController.sink;
+  
 
   CounterBloc(){
     _counter = 0;
     _actionController.stream.listen(_handleLogic);
+    
   }
 
   void _handleLogic(data){
-    _counter = _counter + 1;
+    _counter = _counter + data;
     _inAdd.add(_counter);
   }
 
