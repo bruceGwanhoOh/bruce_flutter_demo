@@ -44,6 +44,7 @@ class _CounterScreenState extends State<CounterScreen> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           FloatingActionButton(
+            heroTag: "btn1",
             onPressed: () {
               bloc.incrementCounter.add(1);
             },
@@ -51,6 +52,7 @@ class _CounterScreenState extends State<CounterScreen> {
           ),
           SizedBox(height: 10,),
           FloatingActionButton(
+            heroTag: "btn2",
             onPressed: () {
               bloc.incrementCounter.add(-1);
             },

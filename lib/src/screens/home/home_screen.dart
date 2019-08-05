@@ -1,5 +1,4 @@
 import 'package:bruce_flutter_demo/src/blocs/bloc_provider.dart';
-import 'package:bruce_flutter_demo/src/screens/calculator/calculator_bloc.dart';
 import 'package:bruce_flutter_demo/src/screens/calculator/calculator_screen.dart';
 import 'package:bruce_flutter_demo/src/screens/counter/counter_bloc.dart';
 import 'package:bruce_flutter_demo/src/screens/counter/counter_screen.dart';
@@ -43,9 +42,6 @@ void _openCounterPage(BuildContext context) {
 
 void _openCalculatorPage(BuildContext context) {
   Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-    return BlocProvider<CalculatorBloc>(
-      bloc: CalculatorBloc(),
-      child: CalculatorScreen(),
-    );
+    return CalculatorScreen();
   }));
 }

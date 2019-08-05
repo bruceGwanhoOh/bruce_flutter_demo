@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class CalculatorScreen extends StatefulWidget {
   CalculatorScreen({Key key}) : super(key: key);
@@ -8,97 +7,91 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
-  void _plus() {}
+  String strInput = "";
+  final _textControllerInput = TextEditingController();
+  final _textControllerResult = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _textControllerInput.addListener(() {
+      print('add listener');
+    });
+    _textControllerResult.addListener(() => {});
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _textControllerInput.dispose();
+    _textControllerResult.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text('Calculator'),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text('Calculator'),
+      ),
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: TextField(
+                decoration: InputDecoration.collapsed(
+                    hintText: "0",
+                    hintStyle: TextStyle(
+                      fontSize: 30,
+                      fontFamily: 'RobotoMono',
+                    )),
+                style: TextStyle(fontSize: 30, fontFamily: 'RobotoMono'),
+                textAlign: TextAlign.right,
+                controller: _textControllerInput,
+                onTap: () {
+                  print("Tapped ");
+                },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: TextField(
+                decoration: InputDecoration.collapsed(
+                    hintText: "0",
+                    hintStyle: TextStyle(
+                      fontSize: 30,
+                      fontFamily: 'RobotoMono',
+                      fontWeight: FontWeight.bold
+                    )),
+                style: TextStyle(fontSize: 30, fontFamily: 'RobotoMono'),
+                textAlign: TextAlign.right,
+                controller: _textControllerResult,
+                onTap: () {
+                  print("Tapped ");
+                },
+              ),
+            ),
+            SizedBox(width: 0.0, height: 20.0),
+            Row(
+              children: <Widget>[Text('text')],
+            ),
+            Row(
+              children: <Widget>[Text('text')],
+            ),
+            Row(
+              children: <Widget>[Text('text')],
+            ),
+            Row(
+              children: <Widget>[Text('text')],
+            ),
+            Row(
+              children: <Widget>[Text('text')],
+            )
+          ],
         ),
-        body: Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: <
-                    Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: TextField(
-              decoration: InputDecoration.collapsed(
-                  hintText: "0",
-                  hintStyle: TextStyle(fontSize: 30, fontFamily: 'RobotoMono')),
-              textAlign: TextAlign.right,
-              style: TextStyle(
-                fontSize: 30,
-                fontFamily: 'RobotoMono',
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: TextField(
-              decoration: InputDecoration.collapsed(
-                  hintText: "0",
-                  hintStyle: TextStyle(fontSize: 30, fontFamily: 'RobotoMono')),
-              textAlign: TextAlign.right,
-              style: TextStyle(
-                fontSize: 30,
-                fontFamily: 'RobotoMono',
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 40,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              MaterialButton(
-                  minWidth: 351,
-                  height: 70.0,
-                  child: Text("=",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 24.0)),
-                  textColor: Colors.black,
-                  color: Colors.grey[100],
-                  onPressed: () {})
-            ],
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            _button("7", _plus),
-            _button("8", _plus),
-            _button("9", _plus),
-            _button("X", _plus)
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            _button("4", _plus),
-            _button("5", _plus),
-            _button("6", _plus),
-            _button("/", _plus)
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            _button("1", _plus),
-            _button("2", _plus),
-            _button("3", _plus),
-            _button("+", _plus)
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            _button("C", _plus),
-            _button("0", _plus),
-            _button(".", _plus),
-            _button("-", _plus)
-          ]),
-        ])));
+      ),
+    );
   }
-}
-
-Widget _button(String number, Function() f) {
-  return MaterialButton(
-    height: 100.0,
-    child: Text(number,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0)),
-    textColor: Colors.black,
-    color: Colors.grey[100],
-    onPressed: f,
-  );
 }
