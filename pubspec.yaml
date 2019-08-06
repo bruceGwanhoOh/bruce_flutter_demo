@@ -25,6 +25,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   rxdart: ^0.22.1
   provider: ^3.0.0+1
+  gradient_widgets: ^0.4.1
+  math_expressions: ^1.0.0
 
 dev_dependencies:
   flutter_test:
