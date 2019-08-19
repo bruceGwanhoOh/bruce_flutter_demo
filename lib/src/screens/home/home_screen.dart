@@ -1,8 +1,12 @@
 import 'package:bruce_flutter_demo/src/blocs/bloc_provider.dart';
+import 'package:bruce_flutter_demo/src/models/cart_model.dart';
+import 'package:bruce_flutter_demo/src/models/catalog_model.dart';
 import 'package:bruce_flutter_demo/src/screens/calculator/calculator_screen.dart';
+import 'package:bruce_flutter_demo/src/screens/catalog/catalog_screen.dart';
 import 'package:bruce_flutter_demo/src/screens/counter/counter_bloc.dart';
 import 'package:bruce_flutter_demo/src/screens/counter/counter_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -13,7 +17,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           RaisedButton(
               child: Text('Open CounterScreen'),
@@ -24,6 +28,11 @@ class HomeScreen extends StatelessWidget {
               child: Text('Open CalculatorScreen'),
               onPressed: () {
                 _openCalculatorPage(context);
+              }),
+          RaisedButton(
+              child: Text('Open CatalogScreen'),
+              onPressed: () {
+                _openCatalogPage(context);
               })
         ],
       )),
@@ -42,6 +51,13 @@ void _openCounterPage(BuildContext context) {
 
 void _openCalculatorPage(BuildContext context) {
   Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-    return CalculatorScreen();
+   return CalculatorScreen();
   }));
 }
+
+void _openCatalogPage(BuildContext context) {
+  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    return CatalogScreen();
+  }));
+}
+

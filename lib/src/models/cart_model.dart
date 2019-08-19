@@ -1,0 +1,22 @@
+import 'package:bruce_flutter_demo/src/models/catalog_model.dart';
+import 'package:flutter/foundation.dart';
+
+class CartModel extends ChangeNotifier{
+  final CatalogModel _catalog;
+
+  final List<int> _itemIds;
+
+  CartModel(this._catalog, CartModel previous) : assert(_catalog != null), _itemIds = previous?._itemIds ?? [];
+
+  List<Item> get items => _itemIds.map( (id) => _catalog.getById(id)).toList();
+
+  int get totalPrice => items.fold(0, (total, current) => total + current.price);
+
+  void add (Item item){
+    _itemIds.add(item.id);
+
+    // call this method any time the model changes in a way that might change your app's UI
+    notifyListeners();
+  }
+
+}
