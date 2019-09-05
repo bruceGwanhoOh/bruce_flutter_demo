@@ -1,6 +1,5 @@
 import 'package:bruce_flutter_demo/src/models/cart_model.dart';
 import 'package:bruce_flutter_demo/src/models/catalog_model.dart';
-import 'package:bruce_flutter_demo/src/screens/catalog/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

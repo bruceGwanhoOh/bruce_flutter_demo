@@ -1,12 +1,12 @@
 import 'package:bruce_flutter_demo/src/blocs/bloc_provider.dart';
-import 'package:bruce_flutter_demo/src/models/cart_model.dart';
-import 'package:bruce_flutter_demo/src/models/catalog_model.dart';
+import 'package:bruce_flutter_demo/src/screens/bottom_tab_screen/bottom_tab_screen.dart';
 import 'package:bruce_flutter_demo/src/screens/calculator/calculator_screen.dart';
 import 'package:bruce_flutter_demo/src/screens/catalog/catalog_screen.dart';
 import 'package:bruce_flutter_demo/src/screens/counter/counter_bloc.dart';
 import 'package:bruce_flutter_demo/src/screens/counter/counter_screen.dart';
+import 'package:bruce_flutter_demo/src/screens/map/map_screen.dart';
+import 'package:bruce_flutter_demo/src/screens/run/runmain_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -33,11 +33,48 @@ class HomeScreen extends StatelessWidget {
               child: Text('Open CatalogScreen'),
               onPressed: () {
                 _openCatalogPage(context);
-              })
-        ],
-      )),
-    );
-  }
+              }),
+          RaisedButton(
+              child: Text('Open MapScreen'),
+              onPressed: () {
+                _openMapPage(context);
+              }),
+              RaisedButton(
+              child: Text('Open RunMainScreen'),
+              onPressed: () {
+                _openRunMainPage(context);
+                              }),
+                              RaisedButton(
+              child: Text('Open Bottom Tab Screen'),
+              onPressed: () {
+                _openBottomTabScreen(context);
+                                              }),
+                                          
+                                        ],
+                                      )),
+                                    );
+                                  }
+}
+
+void _openBottomTabScreen(BuildContext context) {
+
+Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    return BottomTabScreen();
+  }));
+}
+
+void _openRunMainPage(BuildContext context) {
+  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    return RunMainScreen();
+  }));
+}
+
+
+
+void _openMapPage(BuildContext context) {
+  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    return MapScreen();
+  }));
 }
 
 void _openCounterPage(BuildContext context) {
@@ -51,7 +88,7 @@ void _openCounterPage(BuildContext context) {
 
 void _openCalculatorPage(BuildContext context) {
   Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-   return CalculatorScreen();
+    return CalculatorScreen();
   }));
 }
 
@@ -60,4 +97,3 @@ void _openCatalogPage(BuildContext context) {
     return CatalogScreen();
   }));
 }
-
