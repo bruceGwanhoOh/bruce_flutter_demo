@@ -18,10 +18,6 @@ class CounterBloc implements BlocBase{
     _counter = 0;
     _actionController.stream.listen(_handleLogic);
     
-
-
-
-    
   }
 
   void _handleLogic(data){
