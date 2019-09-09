@@ -1,4 +1,5 @@
 import 'package:bruce_flutter_demo/src/blocs/bloc_provider.dart';
+import 'package:bruce_flutter_demo/src/screens/ble/ble_screen.dart';
 import 'package:bruce_flutter_demo/src/screens/bottom_tab_screen/bottom_tab_screen.dart';
 import 'package:bruce_flutter_demo/src/screens/calculator/calculator_screen.dart';
 import 'package:bruce_flutter_demo/src/screens/catalog/catalog_screen.dart';
@@ -39,26 +40,35 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 _openMapPage(context);
               }),
-              RaisedButton(
+          RaisedButton(
               child: Text('Open RunMainScreen'),
               onPressed: () {
                 _openRunMainPage(context);
-                              }),
-                              RaisedButton(
+              }),
+          RaisedButton(
               child: Text('Open Bottom Tab Screen'),
               onPressed: () {
                 _openBottomTabScreen(context);
-                                              }),
-                                          
-                                        ],
-                                      )),
-                                    );
-                                  }
+              }),
+          RaisedButton(
+              child: Text('Open ble'),
+              onPressed: () {
+                _openBleScreen(context);
+              }),
+        ],
+      )),
+    );
+  }
+}
+
+void _openBleScreen(BuildContext context) {
+  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    return BleScreen();
+  }));
 }
 
 void _openBottomTabScreen(BuildContext context) {
-
-Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
     return BottomTabScreen();
   }));
 }
@@ -68,8 +78,6 @@ void _openRunMainPage(BuildContext context) {
     return RunMainScreen();
   }));
 }
-
-
 
 void _openMapPage(BuildContext context) {
   Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
