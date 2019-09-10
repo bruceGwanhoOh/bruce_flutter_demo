@@ -1,6 +1,7 @@
 import 'package:bruce_flutter_demo/src/screens/catalog/cart_screen.dart';
 import 'package:bruce_flutter_demo/src/screens/catalog/catalog_screen.dart';
 import 'package:bruce_flutter_demo/src/screens/home/home_screen.dart';
+import 'package:bruce_flutter_demo/src/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HomeScreen(),
+        home: SplashScreen(),
         routes: {
           '/catalog': (context) => CatalogScreen(),
           '/cart': (context) => CartScreen(),
