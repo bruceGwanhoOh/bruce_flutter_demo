@@ -12,26 +12,24 @@ class BleScreen extends StatefulWidget {
 class _BleScreenState extends State<BleScreen> {
   FlutterBlue flutterBlue;
   BluetoothDevice device;
-  Stream<BluetoothState> _currentState;
+
   final _textControllerInput = TextEditingController();
   bool _canShowButton = false;
-  BluetoothDeviceState state;
-  StreamSubscription<BluetoothDeviceState> _currentDeviceState;
+  BluetoothDeviceState _currentDeviceState;
+  StreamSubscription<BluetoothDeviceState> _deviceStateSubscription;
 
   @override
   void initState() {
     super.initState();
 
     flutterBlue = FlutterBlue.instance;
-    _currentState = flutterBlue.state;
     _textControllerInput.addListener(() {});
   }
 
   @override
   void dispose() {
     super.dispose();
-
-    _currentDeviceState.cancel();
+    _deviceStateSubscription.cancel();
     device?.disconnect();
     flutterBlue = null;
   }
@@ -92,7 +90,8 @@ class _BleScreenState extends State<BleScreen> {
                         setState(() {
                           device = scanResult.device;
                           _textControllerInput.text = device.name;
-                          device.state.listen(_handleState);
+
+                          _deviceStateSubscription = device.state.listen(_handleState);
                         });
                       }
                     });
@@ -128,10 +127,11 @@ class _BleScreenState extends State<BleScreen> {
 
   _connect() async {
     await device.connect(timeout: Duration(seconds: 5), autoConnect: true);
-
-    setState(() {
-      _canShowButton = true;
-    });
+    if (_currentDeviceState == BluetoothDeviceState.connected) {
+      setState(() {
+        _canShowButton = true;
+      });
+    }
     /*
                               if(currentState == BluetoothDeviceState.connected){
                                 setState(() {
@@ -168,9 +168,10 @@ class _BleScreenState extends State<BleScreen> {
     device?.disconnect();
   }
 
-  void _handleState(BluetoothDeviceState event) {
+  void _handleState(BluetoothDeviceState state) {
     //do something
-    print("state" + event.toString());
+    print("state" + state.toString());
+    _currentDeviceState = state;
   }
 }
 
