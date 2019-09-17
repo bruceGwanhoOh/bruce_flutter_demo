@@ -84,19 +84,23 @@ class _BleScreenState extends State<BleScreen> {
                   onPressed: () async {
                     print("start");
 
-                    var subs = flutterBlue.scan().listen((scanResult) {
+                    var subs = flutterBlue.scan(timeout: Duration(minutes: 4)).listen((scanResult) {
+                      print(scanResult.device.name);
                       if (scanResult.device.name.contains("BIOMECH") ||
                           scanResult.device.name.contains("JVC")) {
                         setState(() {
                           device = scanResult.device;
                           _textControllerInput.text = device.name;
 
-                          _deviceStateSubscription = device.state.listen(_handleState);
+                          _deviceStateSubscription =
+                              device.state.listen(_handleState);
                         });
                       }
                     });
+
+                    await Future.delayed(const Duration(seconds: 5));
+
                     flutterBlue.stopScan();
-                    await Future.delayed(const Duration(seconds: 4));
                     subs.cancel();
                   },
                 ),
@@ -132,14 +136,6 @@ class _BleScreenState extends State<BleScreen> {
         _canShowButton = true;
       });
     }
-    /*
-                              if(currentState == BluetoothDeviceState.connected){
-                                setState(() {
-                                _canShowButton = true;
-                                });
-                              }*/
-
-    //device.discoverServices();
   }
 
   Widget _deviceState() {
@@ -165,7 +161,12 @@ class _BleScreenState extends State<BleScreen> {
   }
 
   _disconnect() {
-    device?.disconnect();
+    if (_currentDeviceState == BluetoothDeviceState.connected) {
+      device?.disconnect();
+      setState(() {
+        _canShowButton = false;
+      });
+    }
   }
 
   void _handleState(BluetoothDeviceState state) {
